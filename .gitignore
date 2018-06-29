@@ -1,4 +1,7 @@
 agenda.bin
-agenda.exe
-menu.h.gch
-telaPadrao.h.gch
+*.exe
+*.o
+*.layout
+*.win
+*.dev
+*.gch
