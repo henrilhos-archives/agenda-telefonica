@@ -27,13 +27,13 @@ void imprimeMenu() {
   gotoxy(7, 16);
 	printf("[   ] Escolha uma opcao");
 }
-
 void processaOpcao(int opcao, registro r[], int *tamanho) {
 	switch(opcao) {
 		case '1':
 			criaContato(r, tamanho);
 			break;
 		case '2':
+      removeContato(r, tamanho);
 			break;
 		case '3':
 			break;
@@ -50,34 +50,95 @@ void processaOpcao(int opcao, registro r[], int *tamanho) {
 			break;
 	}
 }
-
 void criaContato(registro r[], int *tamanho) {
-  int indice = *tamanho;
+  int tam = *tamanho;
+  int id = 99;
+
+  for (int i = 0; i < tam; i++) {
+    if (r[i].active == 0) {
+      id = i;
+      break;
+    }
+  }
+
+  if (id == 99) {
+    id = tam;
+  }
 
   system("cls");
   desenharTelaComTitulo(10, 50, 5, 5, "Criar Contato");
 
   gotoxy(8, 9);
-  printf("ID do contato: %d", indice);
+  printf("ID do contato: %d", id);
   gotoxy(8, 10);
 	printf("Nome: [                                ]");
 	gotoxy(8, 11);
   printf("Fone: [             ]");
 
   gotoxy(16, 10);
-  scanf("%s", r[indice].nome);
+  scanf("%s", r[id].name);
   gotoxy(16, 11);
-	scanf("%f", &r[indice].fone);
-  r[indice].id = indice;
+	scanf("%f", &r[id].phone);
+  r[id].id = id;
+  r[id].active = 1;
 
 	*tamanho = *tamanho + 1;
 }
-
-void listaContatos(registro r[], int *tamanho) {
+void removeContato(registro r[], int *tamanho) {
   int tam = *tamanho;
+  int id;
+  int excl;
 
   system("cls");
-  desenharTelaComTitulo(tam + 4, 50, 5, 5, "Lista de Contatos");
+  desenharTelaComTitulo(10, 50, 5, 5, "Remover Contato");
+
+  gotoxy(8, 9);
+  printf("ID do contato: [    ]");
+
+  gotoxy(25, 9);
+  scanf("%d", &id);
+
+  for (int i = 0; i < tam; i++) {
+    if (r[i].id == id) {
+      if (r[i].active == 1) {
+        r[i].active = 0;
+        excl = 1;
+        break;
+      }
+    }
+  }
+
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Remover Contato");
+
+  if (excl == 1) {
+    gotoxy(8, 9);
+    printf("Usuario removido com sucesso.");
+    gotoxy(8, 11);
+    printf("Aperte Enter para continuar...");
+  } else {
+    gotoxy(8, 9);
+    printf("Algo de errado aconteceu.");
+    gotoxy(8, 11);
+    printf("Aperte Enter para continuar...");
+  }
+
+  getch();
+}
+void listaContatos(registro r[], int *tamanho) {
+  int tam = *tamanho;
+  int altura = 0;
+  int posit = 1;
+
+  for (int i = 0; i < tam; i++) {
+    if (r[i].active == 1) {
+      altura++;
+    }
+  }
+
+  system("cls");
+  desenharTelaComTitulo(altura + 4, 50, 5, 5, "Lista de Contatos");
+
   gotoxy(8, 9);
 	printf("ID");
   gotoxy(12, 9);
@@ -85,23 +146,25 @@ void listaContatos(registro r[], int *tamanho) {
   gotoxy(40, 9);
   printf("Fone");
 
-	for(int i = 0; i < tam; i++){
-    gotoxy(8, i + 11);
-    printf("%d", r[i].id);
-    gotoxy(12, i + 11);
-    printf("%s", r[i].nome);
-    gotoxy(40, i + 11);
-		printf("%.0f", r[i].fone);
-	}
+  for (int i = 0; i < tam; i++) {
+    if (r[i].active == 1) {
+      gotoxy(8, posit + 10);
+      printf("%d", r[i].id);
+      gotoxy(12, posit + 10);
+      printf("%s", r[i].name);
+      gotoxy(40, posit + 10);
+  		printf("%.0f", r[i].phone);
+
+      posit++;
+    }
+  }
 
   getch();
 }
-
 void gotoxy(short x, short y) {
   COORD pos = {x, y};
    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
-
 void desenharTela(short altura, short largura, short x, short y) {
   int i = 0;
 
@@ -117,13 +180,11 @@ void desenharTela(short altura, short largura, short x, short y) {
   desenharLinha(1, largura, x, y++ );
   desenharLinha(3, largura, x, y++ );
 }
-
 void desenharTelaComTitulo(short altura, short largura, short x, short y, char* titulo) {
   desenharTela(altura, largura, x, y);
   gotoxy(x + 2, y + 1);
   printf("%s", titulo);
 }
-
 void desenharLinha(short linha, short largura, short x, short y) {
   int i = 0;
 
