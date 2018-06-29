@@ -12,8 +12,9 @@
 
   typedef struct {
     int id;
-  	char nome[30];
-  	float fone;
+    int active;
+  	char name[30];
+  	float phone;
   } registro;
 
   void imprimeMenu();
