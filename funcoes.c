@@ -36,11 +36,13 @@ void processaOpcao(int opcao, registro r[], int *tamanho) {
       removeContato(r, tamanho);
 			break;
 		case '3':
+      pesquisaContato(r, tamanho);
 			break;
 		case '4':
 			listaContatos(r, tamanho);
 			break;
 		case '5':
+      editaContato(r, tamanho);
 			break;
 		case 's':
 			printf("Encerrando...\n");
@@ -125,6 +127,50 @@ void removeContato(registro r[], int *tamanho) {
 
   getch();
 }
+void pesquisaContato(registro r[], int *tamanho) {
+  int tam = *tamanho;
+  int conf;
+  int id;
+
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Pesquisar Contato");
+
+  gotoxy(8, 9);
+  printf("ID do contato: [    ]");
+
+  gotoxy(25, 9);
+  scanf("%d", &id);
+
+  for (int i = 0; i < tam; i++) {
+    if (r[i].id == id) {
+      if (r[i].active == 1) {
+        conf = 1;
+        break;
+      }
+    }
+  }
+
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Pesquisar Contato");
+
+  if (conf == 1) {
+    gotoxy(8, 9);
+    printf("ID: %d", id);
+    gotoxy(8, 10);
+    printf("Nome: %s", r[id].name);
+    gotoxy(8, 11);
+    printf("Fone: %.0f", r[id].phone);
+    gotoxy(8, 13);
+    printf("Aperte Enter para continuar...");
+  } else {
+    gotoxy(8, 9);
+    printf("Algo de errado aconteceu.");
+    gotoxy(8, 11);
+    printf("Aperte Enter para continuar...");
+  }
+
+  getch();
+}
 void listaContatos(registro r[], int *tamanho) {
   int tam = *tamanho;
   int altura = 0;
@@ -160,6 +206,9 @@ void listaContatos(registro r[], int *tamanho) {
   }
 
   getch();
+}
+void editaContato(registro r[], int *tamanho) {
+
 }
 void gotoxy(short x, short y) {
   COORD pos = {x, y};
