@@ -77,14 +77,23 @@ void listaContatos(registro r[], int *tamanho) {
   int tam = *tamanho;
 
   system("cls");
-	printf("Lista de Contatos\n");
-	printf("ID\tNome\tFone\n");
+  desenharTelaComTitulo(tam + 4, 50, 5, 5, "Lista de Contatos");
+  gotoxy(8, 9);
+	printf("ID");
+  gotoxy(12, 9);
+  printf("Nome");
+  gotoxy(40, 9);
+  printf("Fone");
 
 	for(int i = 0; i < tam; i++){
-		printf("%d\t%s\t%.0f\n", r[i].id, r[i].nome, r[i].fone);
+    gotoxy(8, i + 11);
+    printf("%d", r[i].id);
+    gotoxy(12, i + 11);
+    printf("%s", r[i].nome);
+    gotoxy(40, i + 11);
+		printf("%.0f", r[i].fone);
 	}
 
-  printf("\nAperte Enter para continuar...");
   getch();
 }
 
