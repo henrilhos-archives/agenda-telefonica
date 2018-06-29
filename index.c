@@ -1,6 +1,14 @@
+#ifndef TELA_PADRAO
+  #include "telaPadrao.h"
+#endif
+#ifndef MENU
+  #include "menu.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <windows.h>
 
 #define clear() printf("\033[H\033[J")
 #define MAX_AGENDA 50
@@ -9,16 +17,6 @@ typedef struct {
 	char nome[50];
 	int idade;
 } registro;
-
-void imprimeMenu() {
-	printf("Agenda eletronica");
-	printf("\n");
-	printf("\n1 - Novo Contato");
-	printf("\n2 - Lista Contatos");
-	printf("\nS - Sair");
-	printf("\n");
-	printf("\nEscolha uma opção: ");
-}
 
 void criaContato(registro r[], int *tamanho) {
 	int indice = *tamanho;
@@ -33,12 +31,12 @@ void criaContato(registro r[], int *tamanho) {
 }
 
 void listaContatos(registro r[], int *tamanho) {
-	clear();
+	system("cls");
 	int tam = *tamanho;
 	printf("Lista de Contatos\n");
 	printf("Nome\tIdade\n");
 
-	for (int i = 0; i < tam; i++) {
+	for(int i = 0; i < tam; i++){
 		printf("%s\t%d\n", r[i].nome, r[i].idade);
 	}
 }
@@ -79,7 +77,10 @@ int main() {
 	}
 
 	do {
-		clear(); // limpa a tela - multiplataforma
+		system("cls"); // limpa a tela - multiplataforma
+
+		printf("%d", tamanho);
+
 		imprimeMenu();
 		op = tolower(getchar());
 		processaOpcao(op, agenda, &tamanho);
