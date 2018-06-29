@@ -12,6 +12,7 @@
   #define COLUNAS 14
 
   typedef struct {
+    int id;
   	char nome[30];
   	float fone;
   } registro;
