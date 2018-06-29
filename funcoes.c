@@ -80,7 +80,7 @@ void criaContato(registro r[], int *tamanho) {
   gotoxy(16, 10);
   scanf("%s", r[id].name);
   gotoxy(16, 11);
-	scanf("%f", &r[id].phone);
+	scanf("%s", r[id].phone);
   r[id].id = id;
   r[id].active = 1;
 
@@ -159,7 +159,7 @@ void pesquisaContato(registro r[], int *tamanho) {
     gotoxy(8, 10);
     printf("Nome: %s", r[id].name);
     gotoxy(8, 11);
-    printf("Fone: %.0f", r[id].phone);
+    printf("Fone: %s", r[id].phone);
     gotoxy(8, 13);
     printf("Aperte Enter para continuar...");
   } else {
@@ -208,7 +208,58 @@ void listaContatos(registro r[], int *tamanho) {
   getch();
 }
 void editaContato(registro r[], int *tamanho) {
+  int tam = *tamanho;
+  int id;
+  char phone[15];
+  char name[50];
+  int excl;
+  int conf;
 
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Editar Contato");
+
+  gotoxy(8, 9);
+  printf("ID do contato: [    ]");
+  gotoxy(8, 11);
+  printf("Nome: [                                ]");
+	gotoxy(8, 12);
+  printf("Fone: [             ]");
+
+  gotoxy(25, 9);
+  scanf("%d", &id);
+  gotoxy(16, 11);
+  scanf("%s", name);
+  gotoxy(16, 12);
+	scanf("%s", phone);
+
+  for (int i = 0; i < tam; i++) {
+    if (r[i].id == id) {
+      if (r[i].active == 1) {
+        strcpy(r[i].phone, phone);
+        strcpy(r[i].name, name);
+
+        conf = 1;
+        break;
+      }
+    }
+  }
+
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Editar Contato");
+
+  if (conf == 1) {
+    gotoxy(8, 9);
+    printf("Usuario editado com sucesso.");
+    gotoxy(8, 11);
+    printf("Aperte Enter para continuar...");
+  } else {
+    gotoxy(8, 9);
+    printf("Algo de errado aconteceu.");
+    gotoxy(8, 11);
+    printf("Aperte Enter para continuar...");
+  }
+
+  getch();
 }
 void gotoxy(short x, short y) {
   COORD pos = {x, y};
