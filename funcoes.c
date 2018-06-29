@@ -199,7 +199,7 @@ void listaContatos(registro r[], int *tamanho) {
       gotoxy(12, posit + 10);
       printf("%s", r[i].name);
       gotoxy(40, posit + 10);
-  		printf("%.0f", r[i].phone);
+  		printf("%s", r[i].phone);
 
       posit++;
     }
