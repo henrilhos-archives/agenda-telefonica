@@ -3,7 +3,7 @@
 int main() {
 	FILE *arquivo;
 	char *nome_arquivo = "agenda.bin";
-	char op;
+	char option;
 
 	registro agenda[MAX_AGENDA];
 
@@ -25,10 +25,10 @@ int main() {
 
 		imprimeMenu();
 		gotoxy(9, 16);
-		op = tolower(getchar());
-		processaOpcao(op, agenda, &tamanho);
+		option = tolower(getchar());
+		processaOpcao(option, agenda, &tamanho);
 		fflush(stdin); // limpa o buffer do teclado (para remover lixos)
-	} while (op != 's');
+	} while (option != 's');
 
 	// grava o arquivo, com o conteúdo do vetor, ao sair
 	arquivo = fopen(nome_arquivo, "wb");
