@@ -58,14 +58,18 @@ void criaContato(registro r[], int *tamanho) {
   desenharTelaComTitulo(10, 50, 5, 5, "Criar Contato");
 
   gotoxy(8, 9);
+  printf("ID do contato: %d", indice);
+  gotoxy(8, 10);
 	printf("Nome: [                                ]");
-	gotoxy(8, 10);
+	gotoxy(8, 11);
   printf("Fone: [             ]");
 
-  gotoxy(16, 9);
-  scanf("%s", r[indice].nome);
   gotoxy(16, 10);
+  scanf("%s", r[indice].nome);
+  gotoxy(16, 11);
 	scanf("%f", &r[indice].fone);
+  r[indice].id = indice;
+
 	*tamanho = *tamanho + 1;
 }
 
@@ -74,10 +78,10 @@ void listaContatos(registro r[], int *tamanho) {
 
   system("cls");
 	printf("Lista de Contatos\n");
-	printf("Nome\tFone\n");
+	printf("ID\tNome\tFone\n");
 
 	for(int i = 0; i < tam; i++){
-		printf("%s\t%.0f\n", r[i].nome, r[i].fone);
+		printf("%d\t%s\t%.0f\n", r[i].id, r[i].nome, r[i].fone);
 	}
 
   printf("\nAperte Enter para continuar...");
