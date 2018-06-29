@@ -18,10 +18,20 @@
   } registro;
 
   void imprimeMenu();
-  void criaContato(registro r[], int *tamanho);
-  void listaContatos(registro r[], int *tamanho);
   void processaOpcao(int opcao, registro r[], int *tamanho);
+
+  void criaContato(registro r[], int *tamanho);
+
+  void removeContato(registro r[], int *tamanho);
+
+  void pesquisaContato(registro r[], int *tamanho);
+
+  void listaContatos(registro r[], int *tamanho);
+
+  void editaContato(registro r[], int *tamanho);
+
   void gotoxy(short col, short row);
+
   void desenharTela(short altura, short largura, short x, short y);
   void desenharLinha(short linha, short largura, short x, short y);
   void desenharTelaComTitulo(short altura, short largura, short x, short y, char* titulo);

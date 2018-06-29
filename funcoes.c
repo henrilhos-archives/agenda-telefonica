@@ -7,6 +7,27 @@ char _conteudo[LINHAS][COLUNAS] = {
   {200, 205, 188}
 };
 
+void imprimeMenu() {
+  system("cls");
+  desenharTelaComTitulo(10, 50, 5, 5, "Agenda Eletronica");
+
+  gotoxy(8, 9);
+  printf("1 - Criar Contato");
+  gotoxy(8, 10);
+  printf("2 - Remover Contato");
+  gotoxy(8, 11);
+  printf("3 - Pesquisar Contato");
+  gotoxy(8, 12);
+  printf("4 - Listar Contato");
+  gotoxy(8, 13);
+  printf("5 - Editar Contato");
+  gotoxy(8, 14);
+  printf("S - Sair");
+
+  gotoxy(7, 16);
+	printf("[   ] Escolha uma opcao");
+}
+
 void processaOpcao(int opcao, registro r[], int *tamanho) {
 	switch(opcao) {
 		case '1':
@@ -28,27 +49,6 @@ void processaOpcao(int opcao, registro r[], int *tamanho) {
 			printf("Opção inválida!\n");
 			break;
 	}
-}
-
-void imprimeMenu() {
-  system("cls");
-  desenharTelaComTitulo(10, 50, 5, 5, "Agenda Eletronica");
-
-  gotoxy(8, 9);
-  printf("1 - Criar Contato");
-  gotoxy(8, 10);
-  printf("2 - Remover Contato");
-  gotoxy(8, 11);
-  printf("3 - Pesquisar Contato");
-  gotoxy(8, 12);
-  printf("4 - Listar Contato");
-  gotoxy(8, 13);
-  printf("5 - Editar Contato");
-  gotoxy(8, 14);
-  printf("S - Sair");
-
-  gotoxy(7, 16);
-	printf("[   ] Escolha uma opcao");
 }
 
 void criaContato(registro r[], int *tamanho) {
@@ -97,23 +97,9 @@ void listaContatos(registro r[], int *tamanho) {
   getch();
 }
 
-void desenharTelaComTitulo(short altura, short largura, short x, short y, char* titulo) {
-  desenharTela(altura, largura, x, y);
-  gotoxy(x + 2, y + 1);
-  printf("%s", titulo);
-}
-
-void desenharLinha(short linha, short largura, short x, short y) {
-  int i = 0;
-
-  gotoxy(x, y);
-  printf("%c", _conteudo[linha][0]);
-
-  for (i = 0; i < largura; i++) {
-    printf("%c", _conteudo[linha][1]);
-  }
-
-  printf("%c", _conteudo[linha][2]);
+void gotoxy(short x, short y) {
+  COORD pos = {x, y};
+   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
 void desenharTela(short altura, short largura, short x, short y) {
@@ -132,7 +118,21 @@ void desenharTela(short altura, short largura, short x, short y) {
   desenharLinha(3, largura, x, y++ );
 }
 
-void gotoxy(short x, short y) {
-  COORD pos = {x, y};
-   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+void desenharTelaComTitulo(short altura, short largura, short x, short y, char* titulo) {
+  desenharTela(altura, largura, x, y);
+  gotoxy(x + 2, y + 1);
+  printf("%s", titulo);
+}
+
+void desenharLinha(short linha, short largura, short x, short y) {
+  int i = 0;
+
+  gotoxy(x, y);
+  printf("%c", _conteudo[linha][0]);
+
+  for (i = 0; i < largura; i++) {
+    printf("%c", _conteudo[linha][1]);
+  }
+
+  printf("%c", _conteudo[linha][2]);
 }
