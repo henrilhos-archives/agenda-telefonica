@@ -47,7 +47,13 @@ void processaOpcao(int opcao, registro r[], int *tamanho) {
 			criaContato(r, tamanho);
 			break;
 		case '2':
+			break;
+		case '3':
+			break;
+		case '4':
 			listaContatos(r, tamanho);
+			break;
+		case '5':
 			break;
 		case 's':
 			printf("Encerrando...\n");
@@ -82,6 +88,7 @@ int main() {
 		printf("%d", tamanho);
 
 		imprimeMenu();
+		gotoxy(9, 16);
 		op = tolower(getchar());
 		processaOpcao(op, agenda, &tamanho);
 		fflush(stdin); // limpa o buffer do teclado (para remover lixos)
