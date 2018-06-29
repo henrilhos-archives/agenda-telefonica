@@ -14,7 +14,7 @@
     int id;
     int active;
   	char name[30];
-  	float phone;
+  	char phone[15];
   } registro;
 
   void imprimeMenu();
