@@ -12,8 +12,8 @@
   #define COLUNAS 14
 
   typedef struct {
-  	char nome[50];
-  	int idade;
+  	char nome[30];
+  	float fone;
   } registro;
 
   void imprimeMenu();
