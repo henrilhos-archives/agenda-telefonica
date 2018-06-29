@@ -28,8 +28,6 @@ int main() {
 		op = tolower(getchar());
 		processaOpcao(op, agenda, &tamanho);
 		fflush(stdin); // limpa o buffer do teclado (para remover lixos)
-		getchar();
-		getchar();
 	} while (op != 's');
 
 	// grava o arquivo, com o conteúdo do vetor, ao sair
@@ -37,6 +35,7 @@ int main() {
 	fwrite(&tamanho, sizeof(int), 1, arquivo);
 	fwrite(agenda, sizeof(registro), MAX_AGENDA, arquivo);
 	fclose(arquivo);
+	system("cls");
 
 	return 0;
 }
